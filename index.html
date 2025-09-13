@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - Modern Job Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #ff6b6b;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #ff6b6b;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ff6b6b;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            width: 250px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-bar button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+            top: 40%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #182848;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .job-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .job-card-header {
+            padding: 1.5rem;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+        }
+
+        .job-card-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-card-body {
+            padding: 1.5rem;
+        }
+
+        .job-info {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .job-info i {
+            margin-right: 10px;
+            color: #4b6cb7;
+        }
+
+        .job-card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .apply-btn {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            transform: translateZ(20px);
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-3px) translateZ(30px);
+            box-shadow: 0 5px 15px rgba(75, 108, 183, 0.4);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px) rotateY(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-card-content {
+            padding: 1.5rem;
+        }
+
+        .post-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #182848;
+        }
+
+        .post-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: #4b6cb7;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover {
+            color: #182848;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        footer {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b6b;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #ff6b6b;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .jobs-grid, .posts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-briefcase"></i>
+                CareerHub
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">Recruiters</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for jobs...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <h1>Find Your Dream Job Today</h1>
+        <p>Discover thousands of job opportunities from top companies around the country. Your next career move is just a click away.</p>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Latest Jobs</h2>
+        <div class="jobs-grid">
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>IBPS RRB Vacancy 2025</h3>
+                    <p>CRP RRBs XIV</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-info">
+                        <i class="fas fa-briefcase"></i>
+                        <span>13217 Posts</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Graduation Required</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>All India</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Last Date: 15 Aug 2025</span>
+                    </div>
+                </div>
+                <div class="job-card-footer">
+                    <div class="salary">₹35,000 - ₹40,000</div>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>Bihar STET 2025</h3>
+                    <p>Secondary Teacher Eligibility Test</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-info">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Multiple Posts</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>B.Ed Required</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bihar</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Last Date: 20 Jul 2025</span>
+                    </div>
+                </div>
+                <div class="job-card-footer">
+                    <div class="salary">₹40,000 - ₹45,000</div>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>RBI Grade B Vacancy 2025</h3>
+                    <p>Officer Posts</p>
+                </div>
+                <div class="job-card-body">
+                    <div class="job-info">
+                        <i class="fas fa-briefcase"></i>
+                        <span>120 Posts</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Graduation Required</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Multiple Locations</span>
+                    </div>
+                    <div class="job-info">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Last Date: 10 Sep 2025</span>
+                    </div>
+                </div>
+                <div class="job-card-footer">
+                    <div class="salary">₹55,000 - ₹60,000</div>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Recent Posts</h2>
+        <div class="posts-grid">
+            <div class="post-card">
+                <div class="post-card-content">
+                    <h3>Graduation Pass 50000 Form Final Submit Process</h3>
+                    <p>Complete guide on how to submit your graduation form for the 50000 scholarship scheme. Step-by-step instructions.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-card-content">
+                    <h3>RRB Group D Admit Card 2025</h3>
+                    <p>Railway Recruitment Board will soon release the admit cards for Group D posts. Check how to download.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-card-content">
+                    <h3>E-Shram Card Pension Yojana 2025</h3>
+                    <p>All details about the new pension scheme for workers registered under the E-Shram portal.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">CareerHub</div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="copyright">© 2025 CareerHub. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Add 3D effect to job cards on mouse move
+        document.querySelectorAll('.job-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+                const rect = card.getBoundingClientRect();
+                const localX = x - rect.left;
+                const localY = y - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateY = (localX - centerX) / 25;
+                const rotateX = (centerY - localY) / 25;
+                
+                card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
