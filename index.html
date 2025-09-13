@@ -65,6 +65,7 @@
             font-weight: 500;
             transition: color 0.3s;
             position: relative;
+            cursor: pointer;
         }
 
         nav ul li a:hover {
@@ -359,6 +360,7 @@
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
+            cursor: pointer;
         }
 
         .footer-links {
@@ -371,6 +373,7 @@
             color: white;
             text-decoration: none;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .footer-links a:hover {
@@ -405,6 +408,147 @@
             font-size: 0.9rem;
         }
 
+        /* New sections styling */
+        .section {
+            display: none;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .jobs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .job-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #4b6cb7;
+        }
+
+        .recruiters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .recruiter-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .recruiter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .recruiter-logo {
+            width: 80px;
+            height: 80px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #4b6cb7;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-post {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(45deg, #4b6cb7, #182848);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(75, 108, 183, 0.4);
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -412,19 +556,25 @@
 
             nav ul {
                 margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             nav ul li {
-                margin-left: 1rem;
-                margin-right: 1rem;
+                margin: 0.5rem;
             }
 
             .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .jobs-grid, .posts-grid {
+            .jobs-grid, .posts-grid, .jobs-list, .recruiters-grid, .blog-posts {
                 grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -432,17 +582,17 @@
 <body>
     <header>
         <div class="header-container">
-            <div class="logo">
+            <div class="logo" onclick="showSection('home')">
                 <i class="fas fa-briefcase"></i>
                 CareerHub
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Jobs</a></li>
-                    <li><a href="#">Recruiters</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a onclick="showSection('home')">Home</a></li>
+                    <li><a onclick="showSection('jobs')">Jobs</a></li>
+                    <li><a onclick="showSection('recruiters')">Recruiters</a></li>
+                    <li><a onclick="showSection('blog')">Blog</a></li>
+                    <li><a onclick="showSection('contact')">Contact</a></li>
                 </ul>
             </nav>
             <div class="search-bar">
@@ -452,141 +602,384 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <h1>Find Your Dream Job Today</h1>
-        <p>Discover thousands of job opportunities from top companies around the country. Your next career move is just a click away.</p>
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <h1>Find Your Dream Job Today</h1>
+            <p>Discover thousands of job opportunities from top companies around the country. Your next career move is just a click away.</p>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">Latest Jobs</h2>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <h3>IBPS RRB Vacancy 2025</h3>
+                        <p>CRP RRBs XIV</p>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-info">
+                            <i class="fas fa-briefcase"></i>
+                            <span>13217 Posts</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Graduation Required</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>All India</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Last Date: 15 Aug 2025</span>
+                        </div>
+                    </div>
+                    <div class="job-card-footer">
+                        <div class="salary">₹35,000 - ₹40,000</div>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <h3>Bihar STET 2025</h3>
+                        <p>Secondary Teacher Eligibility Test</p>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-info">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Multiple Posts</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>B.Ed Required</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bihar</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Last Date: 20 Jul 2025</span>
+                        </div>
+                    </div>
+                    <div class="job-card-footer">
+                        <div class="salary">₹40,000 - ₹45,000</div>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <h3>RBI Grade B Vacancy 2025</h3>
+                        <p>Officer Posts</p>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-info">
+                            <i class="fas fa-briefcase"></i>
+                            <span>120 Posts</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Graduation Required</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Multiple Locations</span>
+                        </div>
+                        <div class="job-info">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Last Date: 10 Sep 2025</span>
+                        </div>
+                    </div>
+                    <div class="job-card-footer">
+                        <div class="salary">₹55,000 - ₹60,000</div>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Recent Posts</h2>
+            <div class="posts-grid">
+                <div class="post-card">
+                    <div class="post-card-content">
+                        <h3>Graduation Pass 50000 Form Final Submit Process</h3>
+                        <p>Complete guide on how to submit your graduation form for the 50000 scholarship scheme. Step-by-step instructions.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-card-content">
+                        <h3>RRB Group D Admit Card 2025</h3>
+                        <p>Railway Recruitment Board will soon release the admit cards for Group D posts. Check how to download.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-card-content">
+                        <h3>E-Shram Card Pension Yojana 2025</h3>
+                        <p>All details about the new pension scheme for workers registered under the E-Shram portal.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <div class="container">
-        <h2 class="section-title">Latest Jobs</h2>
-        <div class="jobs-grid">
-            <div class="job-card">
-                <div class="job-card-header">
+    <!-- Jobs Section -->
+    <section id="jobs" class="section">
+        <div class="container">
+            <h2 class="section-title">All Job Opportunities</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Browse through all available job opportunities and find your perfect match.</p>
+            
+            <div class="jobs-list">
+                <div class="job-item">
                     <h3>IBPS RRB Vacancy 2025</h3>
-                    <p>CRP RRBs XIV</p>
-                </div>
-                <div class="job-card-body">
-                    <div class="job-info">
-                        <i class="fas fa-briefcase"></i>
-                        <span>13217 Posts</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Graduation Required</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>All India</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Last Date: 15 Aug 2025</span>
-                    </div>
-                </div>
-                <div class="job-card-footer">
-                    <div class="salary">₹35,000 - ₹40,000</div>
+                    <p><i class="fas fa-briefcase"></i> 13217 Posts</p>
+                    <p><i class="fas fa-map-marker-alt"></i> All India</p>
+                    <p><i class="fas fa-calendar-alt"></i> Last Date: 15 Aug 2025</p>
                     <button class="apply-btn">Apply Now</button>
                 </div>
-            </div>
-
-            <div class="job-card">
-                <div class="job-card-header">
+                
+                <div class="job-item">
                     <h3>Bihar STET 2025</h3>
-                    <p>Secondary Teacher Eligibility Test</p>
-                </div>
-                <div class="job-card-body">
-                    <div class="job-info">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Multiple Posts</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>B.Ed Required</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Bihar</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Last Date: 20 Jul 2025</span>
-                    </div>
-                </div>
-                <div class="job-card-footer">
-                    <div class="salary">₹40,000 - ₹45,000</div>
+                    <p><i class="fas fa-briefcase"></i> Multiple Posts</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Bihar</p>
+                    <p><i class="fas fa-calendar-alt"></i> Last Date: 20 Jul 2025</p>
                     <button class="apply-btn">Apply Now</button>
                 </div>
-            </div>
-
-            <div class="job-card">
-                <div class="job-card-header">
+                
+                <div class="job-item">
                     <h3>RBI Grade B Vacancy 2025</h3>
-                    <p>Officer Posts</p>
+                    <p><i class="fas fa-briefcase"></i> 120 Posts</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Multiple Locations</p>
+                    <p><i class="fas fa-calendar-alt"></i> Last Date: 10 Sep 2025</p>
+                    <button class="apply-btn">Apply Now</button>
                 </div>
-                <div class="job-card-body">
-                    <div class="job-info">
-                        <i class="fas fa-briefcase"></i>
-                        <span>120 Posts</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Graduation Required</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Multiple Locations</span>
-                    </div>
-                    <div class="job-info">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Last Date: 10 Sep 2025</span>
-                    </div>
+                
+                <div class="job-item">
+                    <h3>DSSSB Primary Teacher Vacancy 2025</h3>
+                    <p><i class="fas fa-briefcase"></i> 2500 Posts</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Delhi</p>
+                    <p><i class="fas fa-calendar-alt"></i> Last Date: 05 Sep 2025</p>
+                    <button class="apply-btn">Apply Now</button>
                 </div>
-                <div class="job-card-footer">
-                    <div class="salary">₹55,000 - ₹60,000</div>
+                
+                <div class="job-item">
+                    <h3>BSSC CGL 4 Vacancy 2025</h3>
+                    <p><i class="fas fa-briefcase"></i> 1481 Posts</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Bihar</p>
+                    <p><i class="fas fa-calendar-alt"></i> Last Date: 30 Aug 2025</p>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+                
+                <div class="job-item">
+                    <h3>BPSC AEDO Vacancy 2025</h3>
+                    <p><i class="fas fa-briefcase"></i> 935 Posts</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Bihar</p>
+                    <p><i class="fas fa-calendar-alt"></i> Last Date: 25 Jul 2025</p>
                     <button class="apply-btn">Apply Now</button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <h2 class="section-title">Recent Posts</h2>
-        <div class="posts-grid">
-            <div class="post-card">
-                <div class="post-card-content">
-                    <h3>Graduation Pass 50000 Form Final Submit Process</h3>
-                    <p>Complete guide on how to submit your graduation form for the 50000 scholarship scheme. Step-by-step instructions.</p>
-                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+    <!-- Recruiters Section -->
+    <section id="recruiters" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Recruiters</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Connect with top companies and organizations looking for talented professionals.</p>
+            
+            <div class="recruiters-grid">
+                <div class="recruiter-card">
+                    <div class="recruiter-logo">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>IBPS</h3>
+                    <p>Banking Sector</p>
+                    <p>13217 Openings</p>
                 </div>
-            </div>
-
-            <div class="post-card">
-                <div class="post-card-content">
-                    <h3>RRB Group D Admit Card 2025</h3>
-                    <p>Railway Recruitment Board will soon release the admit cards for Group D posts. Check how to download.</p>
-                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                
+                <div class="recruiter-card">
+                    <div class="recruiter-logo">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>RBI</h3>
+                    <p>Central Banking</p>
+                    <p>120 Openings</p>
                 </div>
-            </div>
-
-            <div class="post-card">
-                <div class="post-card-content">
-                    <h3>E-Shram Card Pension Yojana 2025</h3>
-                    <p>All details about the new pension scheme for workers registered under the E-Shram portal.</p>
-                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                
+                <div class="recruiter-card">
+                    <div class="recruiter-logo">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3>DSSSB</h3>
+                    <p>Education Sector</p>
+                    <p>2500 Openings</p>
+                </div>
+                
+                <div class="recruiter-card">
+                    <div class="recruiter-logo">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>BSSC</h3>
+                    <p>State Commission</p>
+                    <p>1481 Openings</p>
+                </div>
+                
+                <div class="recruiter-card">
+                    <div class="recruiter-logo">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>BPSC</h3>
+                    <p>Public Service</p>
+                    <p>935 Openings</p>
+                </div>
+                
+                <div class="recruiter-card">
+                    <div class="recruiter-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>AIIMS</h3>
+                    <p>Healthcare</p>
+                    <p>Faculty Positions</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <h2 class="section-title">Career Blog</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Get insights, tips and updates about the job market and recruitment processes.</p>
+            
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <div class="blog-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Graduation Pass 50000 Form Final Submit Process</h3>
+                        <p>Complete guide on how to submit your graduation form for the 50000 scholarship scheme. Step-by-step instructions.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-post">
+                    <div class="blog-image">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>RRB Group D Admit Card 2025</h3>
+                        <p>Railway Recruitment Board will soon release the admit cards for Group D posts. Check how to download.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-post">
+                    <div class="blog-image">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>E-Shram Card Pension Yojana 2025</h3>
+                        <p>All details about the new pension scheme for workers registered under the E-Shram portal.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-post">
+                    <div class="blog-image">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Scholarship 2025 Payment Date</h3>
+                        <p>Important information about scholarship payment dates and how to check your payment status.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-post">
+                    <div class="blog-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Panchayat Workers List Download</h3>
+                        <p>Step-by-step guide to download the panchayat workers list and check your name in the selection.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-post">
+                    <div class="blog-image">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Bihar-Jewika Form Payment Refund List 2025</h3>
+                        <p>Everything you need to know about the payment refund process for Bihar-Jewika forms.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Have questions or need assistance? Get in touch with our team.</p>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="What is this regarding?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Type your message here..."></textarea>
+                </div>
+                
+                <button class="submit-btn">Send Message</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3>Other Ways to Reach Us</h3>
+                <p><i class="fas fa-envelope"></i> Email: support@careerhub.com</p>
+                <p><i class="fas fa-phone"></i> Phone: +91-9876543210</p>
+                <p><i class="fas fa-map-marker-alt"></i> Address: 123 Job Street, Career City, India</p>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">CareerHub</div>
+            <div class="footer-logo" onclick="showSection('home')">
+                CareerHub
+            </div>
             <div class="footer-links">
-                <a href="#">About Us</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Contact Us</a>
+                <a onclick="showSection('home')">Home</a>
+                <a onclick="showSection('jobs')">Jobs</a>
+                <a onclick="showSection('recruiters')">Recruiters</a>
+                <a onclick="showSection('blog')">Blog</a>
+                <a onclick="showSection('contact')">Contact</a>
             </div>
             <div class="social-icons">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -599,6 +992,20 @@
     </footer>
 
     <script>
+        // Function to show the selected section and hide others
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
         // Add 3D effect to job cards on mouse move
         document.querySelectorAll('.job-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -623,6 +1030,32 @@
                     card.style.transform = '';
                 }, 500);
             });
+        });
+
+        // Make Apply buttons functional
+        document.querySelectorAll('.apply-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const jobTitle = this.closest('.job-card').querySelector('.job-card-header h3').textContent;
+                alert(`Applying for: ${jobTitle}\nThis would open an application form in a real website.`);
+            });
+        });
+
+        // Make the contact form functional
+        document.querySelector('.submit-btn').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && subject && message) {
+                alert('Thank you for your message! We will get back to you soon.');
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Please fill in all fields before sending.');
+            }
         });
     </script>
 </body>
